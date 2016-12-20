@@ -30,7 +30,7 @@ template<typename T> void Vector<T>::erase(const Vector<T>::iterator& location)
 {
 	std::size_t index = location.mIndex;
 
-	for (; index < mNextIndex - 1; index++)
+	for (; index < mNextIndex; index++)
 	{
 		mArray[index] = mArray[index + 1];
 	}
@@ -42,7 +42,7 @@ template<typename T> void Vector<T>::erase(const Vector<T>::iterator& first, con
 	std::size_t index = first.mIndex;
 	std::size_t takeFrom = last.mIndex;
 
-	for (; takeFrom < mNextIndex - 1; index++, takeFrom++)
+	for (; takeFrom < mNextIndex; index++, takeFrom++)
 	{
 		mArray[index] = mArray[takeFrom];
 	}
@@ -89,6 +89,7 @@ template<typename T> void Vector<T>::resize(std::size_t newSize)
 	{
 		newArray[index] = mArray[index];
 	}
+	mSize = newSize;
 
 	delete [] mArray;
 	mArray = newArray;

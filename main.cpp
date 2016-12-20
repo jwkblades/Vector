@@ -32,5 +32,21 @@ int main(void)
 		cout << "Vector item: " << myInt << endl;
 	}
 
+	for (int i = 10; i < 1001; i++)
+	{
+		myVector.append(i);
+	}
+
+	first = myVector.begin();
+	second = first;
+	first += 5;
+	second += 990;
+	myVector.erase(first, second);
+	
+	for (int& myInt : myVector)
+	{
+		cout << "Vector item: " << myInt << endl;
+	}
+
 	return 0;
 }
