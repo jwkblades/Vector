@@ -1,7 +1,27 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <algorithm>
 using namespace std;
 
+
 #include "Vector.h"
+
+/**
+ * Template specialization for for our custom int vector class (don't use this
+ * for production code!) to give it the necessary items to work with std::sort.
+ */
+namespace std
+{
+	template<>
+	struct iterator_traits<typename Vector<int>::iterator>
+	{
+	public:
+		typedef int value_type;
+		typedef int difference_type;
+		typedef random_access_iterator_tag iterator_category;
+	};
+}
 
 int main(void)
 {
@@ -43,6 +63,25 @@ int main(void)
 	second += 990;
 	myVector.erase(first, second);
 	
+	for (int& myInt : myVector)
+	{
+		cout << "Vector item: " << myInt << endl;
+	}
+
+	myVector.erase(myVector.begin(), myVector.end());
+	std::srand(time(0));
+	for (int i = 0; i < 10; i++)
+	{
+		myVector.append(std::rand());
+	}
+
+	cout << endl << "Sorting (randomized): " << endl;
+	for (int& myInt : myVector)
+	{
+		cout << "Vector item: " << myInt << endl;
+	}
+	std::sort(myVector.begin(), myVector.end());
+	cout << endl << "Sorted vector: " << endl;
 	for (int& myInt : myVector)
 	{
 		cout << "Vector item: " << myInt << endl;

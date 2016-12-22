@@ -2,6 +2,7 @@
 #define __VECTOR_H
 
 #include <cstdlib>
+#include <iterator>
 
 /**
  * An example vector class for learning purposes.
@@ -86,12 +87,22 @@ public:
 		T& operator*(void);
 
 		/**
+		 * Some hacked together functions to fill in the gaps that we missing to work
+		 * with std::sort.
+		 */
+		int operator-(const Vector<T>::iterator& other) const;
+		bool operator<(const Vector<T>::iterator& other) const;
+		Vector<T>::iterator operator+(int offset) const;
+		Vector<T>::iterator operator-(int offset) const;
+
+		/**
 		 * Move to the next item in the vector.
 		 *
 		 * @returns The iterator after it has moved.
 		 */
 		Vector<T>::iterator& operator++(void);
 		Vector<T>::iterator& operator++(int);
+
 		/**
 		 * Move the iterator forward X spaces.
 		 *
@@ -136,6 +147,7 @@ public:
 		Vector<T>* mVector;
 		std::size_t mIndex;
 	};
+
 
 	/**
 	 * Erase one or more elements in a vector.
@@ -193,6 +205,8 @@ private:
 	std::size_t mSize;
 	std::size_t mNextIndex;
 };
+
+
 
 #include "Vector.ipp"
 

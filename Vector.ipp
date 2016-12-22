@@ -175,6 +175,25 @@ template<typename T> typename Vector<T>::iterator& Vector<T>::iterator::operator
 	mIndex++;
 	return *this;
 }
+
+template<typename T> int Vector<T>::iterator::operator-(const Vector<T>::iterator& other) const
+{
+	return mIndex - other.mIndex;
+}
+template<typename T> bool Vector<T>::iterator::operator<(const Vector<T>::iterator& other) const
+{
+	return mIndex < other.mIndex;
+}
+template<typename T> typename Vector<T>::iterator Vector<T>::iterator::operator+(int offset) const
+{
+	return Vector<T>::iterator(mIndex + offset, mVector);
+}
+template<typename T> typename Vector<T>::iterator Vector<T>::iterator::operator-(int offset) const
+{
+	return Vector<T>::iterator(mIndex - offset, mVector);
+}
+
+
 template<typename T> typename Vector<T>::iterator& Vector<T>::iterator::operator--(void)
 {
 	return (*this)--;
